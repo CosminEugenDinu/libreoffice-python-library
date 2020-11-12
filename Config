@@ -12,7 +12,7 @@ flags = ["--headless", "--invisible", "--nocrashreport", "--nodefault", "--nofir
 host = "localhost"
 port = 2002
 # content of '--accept=' flag for starting soffice.bin with open connection
-accept_open = "socket,host=0,port=%s,tcpNoDelay=1;urp;StarOffice.ComponentContext"
+accept_open = "socket,host=0,port=2002,tcpNoDelay=1;urp,Negotiate=0,ForceSynchronous=0;"
 # this should be uset to connect to soffice with opened socket
 connect_url = "uno:socket,host=%s,port=%s,tcpNoDalay=1;urp,Negotiate=0,ForceSynchronous=0;StarOffice.ServiceManager"
 
