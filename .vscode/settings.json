@@ -1,0 +1,6 @@
+{
+    "code-runner.executorMap": {
+        "python": "pipenv run $pythonPath $fullFileName",
+    },
+    "code-runner.runInTerminal": true
+}
