@@ -9,7 +9,7 @@ LibreOffice scripting using python
 ## Install
 ```bash
 (
-git clone https://github.com/CosminEugenDinu/libreoffice-python-library/edit/main/README.md
+git clone https://github.com/CosminEugenDinu/libreoffice-python-library/
 cd libreoffice-python-library
 pipenv install --dev
 )
