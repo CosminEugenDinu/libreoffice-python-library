@@ -16,7 +16,7 @@ pipenv install --dev
 ```
 
 ## Setup
-- edit ***config*** [toml](https://github.com/toml-lang/toml) file to match your system configuration
+- edit ***Config*** [toml](https://github.com/toml-lang/toml) file to match your system configuration
 
 ## License
 ***libreoffice-python-library*** is distributed under GNU GPL V3. Because you will implicitely also use ***LibreOffice*** source code and binaries, its license Mozilla Public License v.2.0 applies as well. Copies of both are included in this repository.
