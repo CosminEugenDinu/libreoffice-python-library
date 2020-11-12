@@ -8,3 +8,4 @@
 - https://github.com/mila/pyoo
 - https://github.com/faide/py3o.template
 - https://github.com/T0ha/ezodf
+- https://github.com/robsco-git/spreadsheet_server
