@@ -13,7 +13,9 @@ class Desktop:
         desktop = uno_smgr.createInstanceWithContext(
             "com.sun.star.frame.Desktop", uno_ctx )
         if not desktop:
-            raise Exception("Failed to create OpenOffice desktop on port %s" % self.port)
+            # raise Exception("Failed to create OpenOffice desktop')
+            pass
+        lo_proc.shutdown(desktop)
 
     
     # def start_lo_service(self):
