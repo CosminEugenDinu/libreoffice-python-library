@@ -13,7 +13,7 @@ host = "localhost"
 port = 2002
 # content of '--accept=' flag for starting soffice.bin with open connection
 accept_open = "socket,host=%s,port=%s,tcpNoDelay=1;urp;StarOffice.ComponentContext"
-# this should be uset to connect running libreoffice process with opened socket
+# this is used to connect running libreoffice process with opened socket
 connection_url = "uno:socket,host=%s,port=%s,tcpNoDalay=1;urp;StarOffice.ComponentContext"
 # how much time to wait for connecting
 timeout = 3
