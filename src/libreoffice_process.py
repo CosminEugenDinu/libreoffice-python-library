@@ -9,7 +9,7 @@ now = time.time
 from tools.messages import Messages
 
 # from .libreoffice_core import ProtertyValue
-# from com.sun.star.beans import PropertyValue
+from com.sun.star.beans import PropertyValue
 
 class LOprocess:
     def __init__(self,
@@ -107,11 +107,14 @@ class LOprocess:
                     raise
             else:
                 raise
-        except Exception as e:
+        except Exception:
             raise
         self.messages.append(get_msgs())
         print(self.messages)
         return uno_ctx
 
-    def shutdown(self):
+    def shutdown(self, desktop):
+        add_msg, get_msgs = Messages('info')
+        desktop.terminate()
+        add_msg(f'{now()} Desktop {1} + lo_process {2} terminated!')
         print('I\'m  OFF now!')
