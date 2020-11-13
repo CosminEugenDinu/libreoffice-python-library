@@ -90,15 +90,15 @@ class LOprocess:
                 # Is it already/still running?
                 retcode = lo_proc.poll()
                 if retcode == 81:
-                    add_msg(f'{now()} Caught exit code 81 (new installation).')
+                    add_msg(f'{now()} Caught exit code 81 (new installation of libreoffice ?).')
                     self.connect()
                     break
                 elif retcode is not None:
-                    # info(3, "Process %s (pid=%s) exited with %s." % (office.binary, ooproc.pid, retcode))
                     add_msg(f'{now()} Process pid={lo_proc.pid} exited with {retcode}.')
                     raise
                 try:
                     uno_ctx = resolver.resolve(url)
+                    add_msg(f'{now()} Connected to libreoffice process via {url}')
                     break
                 except NoConnectException:
                     time.sleep(0.5)
@@ -106,11 +106,9 @@ class LOprocess:
                 except:
                     raise
             else:
-                print('hot here......................................... ')
                 raise
         except Exception as e:
             raise
-            # error("Launch of %s failed.\n%s" % (office.binary, e))
         self.messages.append(get_msgs())
         print(self.messages)
         return uno_ctx
