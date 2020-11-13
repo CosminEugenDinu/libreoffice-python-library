@@ -1,15 +1,19 @@
+import sys
 import time
 import subprocess
 from .config import config
-from .libreoffice_core import uno
+# uno.py directory (package) path
+sys.path.append(config['libreoffice']['python_uno_location'])
+# ***** UNO *****
+import uno
 from com.sun.star.connection import NoConnectException
-
-now = time.time
+# from com.sun.star.beans import PropertyValue
+# from .libreoffice_core import ProtertyValue
 
 from tools.messages import Messages
 
-# from .libreoffice_core import ProtertyValue
-from com.sun.star.beans import PropertyValue
+now = time.time
+
 
 class LOprocess:
     def __init__(self,
@@ -49,10 +53,9 @@ class LOprocess:
         # command used to start libreoffice with open socket
         start_command = f"{self.libreoffice_bin} {start_command_flags}"
 
-        # loproc = Popen(start_command.split())
-        # self.loproc = subprocess.Popen(start_command.split(), close_fds=True)
-        # lo_proc = subprocess.Popen(start_command.split())
+        # if named pipe connection:
         # "--accept='pipe,name=somepipename;urp;StarOffice.ComponentContext'"
+
         add_msg(f'{now()} Starting libreoffice process {start_command}')
         lo_proc = subprocess.Popen(start_command, shell=True)
         add_msg(f'{now()} Process shell_pid={lo_proc.pid} started.')
@@ -113,7 +116,7 @@ class LOprocess:
         print(self.messages)
         return uno_ctx
 
-    def shutdown(self, desktop):
+    def terminate(self, desktop):
         add_msg, get_msgs = Messages('info')
         desktop.terminate()
         add_msg(f'{now()} Desktop {1} + lo_process {2} terminated!')

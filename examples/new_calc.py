@@ -3,7 +3,8 @@ sys.path.append('.')
 
 from src import document
 
-desktop = document.Desktop() 
+calc = document.Calc()
+print(dir(calc))
 
 
 

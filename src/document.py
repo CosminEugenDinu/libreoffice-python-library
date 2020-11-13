@@ -1,23 +1,22 @@
-import sys 
-from .config import config
-from .libreoffice_core import uno
-from .libreoffice_process import LOprocess 
+from .libreoffice import LibreOffice
 
-# from com.sun.star.beans import PropertyValue
 
-class Desktop:
+class Calc:
     def __init__(self):
-        lo_proc = LOprocess()
-        uno_ctx = lo_proc.connect()
-        uno_smgr = uno_ctx.ServiceManager
-        desktop = uno_smgr.createInstanceWithContext(
-            "com.sun.star.frame.Desktop", uno_ctx )
-        if not desktop:
-            # raise Exception("Failed to create OpenOffice desktop')
-            pass
-        lo_proc.shutdown(desktop)
+        libreoffice = LibreOffice()
+        desktop = libreoffice.get_desktop()
+        print(dir(desktop))
+        desktop.terminate()
 
-    
+class Draw:
+    def __init__(self):
+        pass
+
+class Writer:
+    def __init__(self):
+        pass
+
+
     # def start_lo_service(self):
     # def newCalc(self):
         # inProps = PropertyValue( "Hidden" , 0 , True, 0 ),
@@ -31,7 +30,6 @@ class Desktop:
         # print(self.name, 'successfully saved') 
         # cwd = systemPathToFileUrl( getcwd() )
         # destFile = absolutize( cwd, systemPathToFileUrl(outputfile) )
-
 
 
 
