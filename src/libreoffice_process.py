@@ -91,7 +91,7 @@ class LOprocess:
                 retcode = lo_proc.poll()
                 if retcode == 81:
                     add_msg(f'{now()} Caught exit code 81 (new installation of libreoffice ?).')
-                    self.connect()
+                    # self.connect()
                     break
                 elif retcode is not None:
                     add_msg(f'{now()} Process pid={lo_proc.pid} exited with {retcode}.')
