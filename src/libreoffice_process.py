@@ -4,6 +4,8 @@ from .config import config
 from .libreoffice_core import uno
 from com.sun.star.connection import NoConnectException
 
+now = time.time
+
 from tools.messages import Messages
 
 # from .libreoffice_core import ProtertyValue
@@ -32,10 +34,13 @@ class LOprocess:
         # process ref of running libreoffice set from startup method
         self.loproc = None
         self.desktop = None
+        self.messages = []
 
     def startup(self, port=None):
         """ Starts libreoffice process.
         """
+        add_msg, get_msgs = Messages('info')
+
         accept_open = self.accept_open % (self.host, (port or self.port))
         # "--accept=%s" => %s is replaced with accept_open
         # stringify command flags
@@ -48,23 +53,25 @@ class LOprocess:
         # self.loproc = subprocess.Popen(start_command.split(), close_fds=True)
         # lo_proc = subprocess.Popen(start_command.split())
         # "--accept='pipe,name=somepipename;urp;StarOffice.ComponentContext'"
+        add_msg(f'{now()} Starting libreoffice process {start_command}')
         lo_proc = subprocess.Popen(start_command, shell=True)
+        add_msg(f'{now()} Process shell_pid={lo_proc.pid} started.')
+
+        # I could'n connect to process if opended it like this:
+        # lo_proc = subprocess.Popen(start_command.split())
+        # add_msg(f'{now()} Process pid={lo_proc.pid} started.')
+
+        self.messages.append(get_msgs())
         return lo_proc
 
     def connect(self, host=None, port=None):
-        
+        add_msg, get_msgs = Messages('info')
+
         local_ctx = uno.getComponentContext()
         smgr_local = local_ctx.ServiceManager
         resolver = smgr_local.createInstanceWithContext(
             "com.sun.star.bridge.UnoUrlResolver", local_ctx)
         url = self.connection_url % (self.host, (port or self.port))
-        add_msg, get_msgs = Messages('warning')
-        add_msg('first mess')
-        add_msg('sec meg')
-        add_msg('first_mess')
-        messages = get_msgs()
-        print(messages)
-        return
 
         uno_ctx = None
         # try to resolve connection
@@ -72,7 +79,9 @@ class LOprocess:
             # url = "uno:socket,host=localhost,port=2002,tcpNoDalay=1;urp;StarOffice.ComponentContext"
             # url = "uno:pipe,name=somepipename;urp;StarOffice.ComponentContext"
             uno_ctx = resolver.resolve(url)
+            add_msg(f'{now()} Connected to libreoffice process via {url}')
         except NoConnectException as nce:
+            add_msg(f'{now()} Got: {nce}')
             # launch libreoffice process
             lo_proc = self.startup()
 
@@ -80,13 +89,13 @@ class LOprocess:
             while timeout < self.timeout:
                 # Is it already/still running?
                 retcode = lo_proc.poll()
-                raise Exception(lo_proc.pid)
                 if retcode == 81:
-                    # info(3, "Caught exit code 81 (new installation). Restarting listener.")
-                    return self.connect()
+                    add_msg(f'{now()} Caught exit code 81 (new installation).')
+                    self.connect()
                     break
                 elif retcode is not None:
                     # info(3, "Process %s (pid=%s) exited with %s." % (office.binary, ooproc.pid, retcode))
+                    add_msg(f'{now()} Process pid={lo_proc.pid} exited with {retcode}.')
                     raise
                 try:
                     uno_ctx = resolver.resolve(url)
@@ -102,6 +111,8 @@ class LOprocess:
         except Exception as e:
             raise
             # error("Launch of %s failed.\n%s" % (office.binary, e))
+        self.messages.append(get_msgs())
+        print(self.messages)
         return uno_ctx
 
     def shutdown(self):
