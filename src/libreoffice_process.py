@@ -6,9 +6,8 @@ from .config import config
 sys.path.append(config['libreoffice']['python_uno_location'])
 # ***** UNO *****
 import uno
-from com.sun.star.connection import NoConnectException
-# from com.sun.star.beans import PropertyValue
-# from .libreoffice_core import ProtertyValue
+NoConnectException = uno.getClass('com.sun.star.connection.NoConnectException')
+# from com.sun.star.connection import NoConnectException
 
 from tools.messages import Messages
 
@@ -106,12 +105,7 @@ class LOprocess:
                 except NoConnectException:
                     time.sleep(0.5)
                     timeout += 0.5
-                except:
-                    raise
-            else:
-                raise
-        except Exception:
-            raise
+
         self.messages.append(get_msgs())
         print(self.messages)
         return uno_ctx
