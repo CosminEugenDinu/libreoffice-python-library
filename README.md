@@ -12,7 +12,7 @@ pipenv install -e "git+https://github.com/CosminEugenDinu/libreoffice-python-lib
 ```
 
 ## Setup
-- edit ***lo_config.toml*** [toml](https://github.com/toml-lang/toml) file to match your system configuration
+- edit [***lo_config.toml***](https://raw.githubusercontent.com/CosminEugenDinu/libreoffice-python-library/pypi/lo_config.toml) file to match your system configuration
 
 ## Usage
 ```py
