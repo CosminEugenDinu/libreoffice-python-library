@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: libreoffice-py-lib
+Name: libreoffice-py
 Version: 0.0.1
 Summary: Python-UNO-LibreOffice interface for working with documents.
 Home-page: https://github.com/CosminEugenDinu/libreoffice-python-library/tree/pypi

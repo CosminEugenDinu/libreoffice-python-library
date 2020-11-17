@@ -1,2 +1,0 @@
-libreoffice_py_lib
-tools

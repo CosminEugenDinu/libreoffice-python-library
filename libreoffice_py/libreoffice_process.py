@@ -59,7 +59,6 @@ class LOprocess:
         return lo_proc
 
     def connect(self, host=None, port=None):
-        add_msg, get_msgs = Messages('info')
 
         local_ctx = uno.getComponentContext()
         smgr_local = local_ctx.ServiceManager
@@ -82,15 +81,12 @@ class LOprocess:
                 # Is it already/still running?
                 retcode = lo_proc.poll()
                 if retcode == 81:
-                    add_msg(f'{now()} Caught exit code 81 (new installation of libreoffice ?).')
                     # self.connect()
-                    break
+                    continue
                 elif retcode is not None:
-                    add_msg(f'{now()} Process pid={lo_proc.pid} exited with {retcode}.')
                     raise
                 try:
                     uno_ctx = resolver.resolve(url)
-                    add_msg(f'{now()} Connected to libreoffice process via {url}')
                     break
                 except NoConnectException:
                     time.sleep(0.5)
@@ -100,3 +96,4 @@ class LOprocess:
 
     def terminate(self, desktop):
         desktop.terminate()
+

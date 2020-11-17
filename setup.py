@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="libreoffice-py-lib",
+    name="libreoffice-py",
     version="0.0.1",
     author="Cosmin Eugen Dinu",
     author_email="tcosdev@gmail.com",

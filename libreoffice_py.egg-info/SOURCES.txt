@@ -1,0 +1,14 @@
+README.md
+setup.py
+libreoffice_py/__init__.py
+libreoffice_py/config.py
+libreoffice_py/document.py
+libreoffice_py/libreoffice.py
+libreoffice_py/libreoffice_process.py
+libreoffice_py/utils.py
+libreoffice_py.egg-info/PKG-INFO
+libreoffice_py.egg-info/SOURCES.txt
+libreoffice_py.egg-info/dependency_links.txt
+libreoffice_py.egg-info/requires.txt
+libreoffice_py.egg-info/top_level.txt
+test/test.py
