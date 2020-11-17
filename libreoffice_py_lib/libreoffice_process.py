@@ -9,8 +9,6 @@ import uno
 NoConnectException = uno.getClass('com.sun.star.connection.NoConnectException')
 # from com.sun.star.connection import NoConnectException
 
-from tools.messages import Messages
-
 now = time.time
 
 
@@ -37,12 +35,10 @@ class LOprocess:
         # process ref of running libreoffice set from startup method
         self.loproc = None
         self.desktop = None
-        self.messages = []
 
     def startup(self, port=None):
         """ Starts libreoffice process.
         """
-        add_msg, get_msgs = Messages('info')
 
         accept_open = self.accept_open % (self.host, (port or self.port))
         # "--accept=%s" => %s is replaced with accept_open
@@ -55,15 +51,11 @@ class LOprocess:
         # if named pipe connection:
         # "--accept='pipe,name=somepipename;urp;StarOffice.ComponentContext'"
 
-        add_msg(f'{now()} Starting libreoffice process {start_command}')
         lo_proc = subprocess.Popen(start_command, shell=True)
-        add_msg(f'{now()} Process shell_pid={lo_proc.pid} started.')
 
         # I could'n connect to process if opended it like this:
         # lo_proc = subprocess.Popen(start_command.split())
-        # add_msg(f'{now()} Process pid={lo_proc.pid} started.')
 
-        self.messages.append(get_msgs())
         return lo_proc
 
     def connect(self, host=None, port=None):
@@ -81,9 +73,7 @@ class LOprocess:
             # url = "uno:socket,host=localhost,port=2002,tcpNoDalay=1;urp;StarOffice.ComponentContext"
             # url = "uno:pipe,name=somepipename;urp;StarOffice.ComponentContext"
             uno_ctx = resolver.resolve(url)
-            add_msg(f'{now()} Connected to libreoffice process via {url}')
         except NoConnectException as nce:
-            add_msg(f'{now()} Got: {nce}')
             # launch libreoffice process
             lo_proc = self.startup()
 
@@ -106,11 +96,7 @@ class LOprocess:
                     time.sleep(0.5)
                     timeout += 0.5
 
-        self.messages.append(get_msgs())
-        # print(self.messages)
         return uno_ctx
 
     def terminate(self, desktop):
-        add_msg, get_msgs = Messages('info')
         desktop.terminate()
-        add_msg(f'{now()} Desktop {1} + lo_process {2} terminated!')
