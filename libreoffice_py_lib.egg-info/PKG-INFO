@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: libreoffice-py-lib
+Version: 0.0.1
+Summary: Python-UNO-LibreOffice interface for working with documents.
+Home-page: https://github.com/CosminEugenDinu/libreoffice-python-library/tree/pypi
+Author: Cosmin Eugen Dinu
+Author-email: tcosdev@gmail.com
+License: UNKNOWN
+Description: # libreoffice-python-library
+        LibreOffice scripting using python
+        
+        ## Prerequisites
+        - [python3.x](https://docs.python.org/3/using/unix.html)
+        - [pipenv](https://github.com/pypa/pipenv)
+        - [LibreOffice](https://gist.github.com/CosminEugenDinu/d584dddfce534f8272ab9f661eb480a5#file-install_libreoffice-sh)
+        
+        ## Install
+        ```bash
+        (
+        git clone https://github.com/CosminEugenDinu/libreoffice-python-library/
+        cd libreoffice-python-library
+        pipenv install --dev
+        )
+        ```
+        
+        ## Setup
+        - edit ***Config*** [toml](https://github.com/toml-lang/toml) file to match your system configuration
+        
+        ## Usage
+        - check scripts from examples
+        
+        ## License
+        ***libreoffice-python-library*** is distributed under GNU GPL V3. Because you will implicitely also use ***LibreOffice*** source code and binaries, its license Mozilla Public License v.2.0 applies as well. Copies of both are included in this repository.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

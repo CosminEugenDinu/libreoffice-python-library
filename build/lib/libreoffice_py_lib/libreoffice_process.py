@@ -107,10 +107,11 @@ class LOprocess:
                     timeout += 0.5
 
         self.messages.append(get_msgs())
-        # print(self.messages)
+        print(self.messages)
         return uno_ctx
 
     def terminate(self, desktop):
         add_msg, get_msgs = Messages('info')
         desktop.terminate()
         add_msg(f'{now()} Desktop {1} + lo_process {2} terminated!')
+        print('I\'m  OFF now!')
