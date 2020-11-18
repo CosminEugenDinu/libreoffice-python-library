@@ -17,8 +17,14 @@ class Calc:
     class Range:
         def __init__(self, _uno_range):
             self._uno_range = _uno_range
+
         def set_data(self, data):
-            return self._uno_range.setData(data) 
+            """
+            Fills the range cells with data (strings / numbers).
+            Parameters
+                data    a tow dimensional array - must correspond with range dimensions
+            """
+            return self._uno_range.setDataArray(data)
 
     class Sheet:
         def __init__(self, _uno_sheet):
