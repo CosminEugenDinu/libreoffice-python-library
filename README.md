@@ -8,11 +8,11 @@ LibreOffice scripting using python
 
 ## Install
 ```bash
-pipenv install -e "git+https://github.com/CosminEugenDinu/libreoffice-python-library.git@pypi#egg=libreoffice-py"
+pipenv install -e "git+https://github.com/CosminEugenDinu/libreoffice-python-library.git#egg=libreoffice-py"
 ```
 
 ## Setup
-- edit [***lo_config.toml***](https://raw.githubusercontent.com/CosminEugenDinu/libreoffice-python-library/lo_config.toml) file to match your system configuration (if does not exists, it is created at first run)
+- edit [***lo_config.toml***](https://raw.githubusercontent.com/CosminEugenDinu/libreoffice-python-library/main/lo_config.toml) file to match your system configuration (if does not exists, it is created at first run)
 
 ## Usage
 ```py
