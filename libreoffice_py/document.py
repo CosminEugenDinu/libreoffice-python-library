@@ -11,11 +11,60 @@ class Calc:
         PropertyValue = uno.getClass('com.sun.star.beans.PropertyValue')
         inProps = PropertyValue( "Hidden" , 0 , True, 0 ),
         # https://www.openoffice.org/api/docs/common/ref/com/sun/star/frame/XComponentLoader.html
-        self._document = self.desktop.loadComponentFromURL(
+        self.document = self.desktop.loadComponentFromURL(
             "private:factory/scalc", "_blank", 0, inProps )
 
+    class Range:
+        def __init__(self, _uno_range):
+            self._uno_range = _uno_range
+
+        def set_data(self, data):
+            """
+            Fills the range cells with data (strings / numbers).
+            Parameters
+                data    a tow dimensional array - must correspond with range dimensions
+            """
+            return self._uno_range.setDataArray(data)
+
+    class Sheet:
+        def __init__(self, _uno_sheet):
+            self._uno_sheet = _uno_sheet
+        
+        def get_range(self, nLeft, nTop, nRight, nBottom):
+            """
+            Returns a sub-range of cells within the range.
+
+            Parameters
+                nLeft	is the column index of the first cell inside the range.
+                nTop	is the row index of the first cell inside the range.
+                nRight	is the column index of the last cell inside the range.
+                nBottom	is the row index of the last cell inside the range.
+                nSheet	is the sheet index of the sheet inside the document.
+            Returns
+                the specified cell range.
+            Exceptions
+                com::sun::star::lang::IndexOutOfBoundsException	if an index is outside the dimensions of this range.
+            """
+
+            _uno_range = self._uno_sheet.getCellRangeByPosition(nLeft, nTop, nRight, nBottom)
+            return Calc.Range(_uno_range) 
+
+    class Sheets:
+        def __init__(self, document):
+            self._uno_sheets = document.getSheets()
+
+        def __getitem__(self, index):
+            sheet = Calc.Sheet(self._uno_sheets[index])
+            return sheet
+    
+
+            
+
     def get_sheets(self):
-        sheets = self._document.getSheets()
+        """
+        Returns the collection of sheets in the document.
+        """
+        sheets = Calc.Sheets(self.document)
         return sheets
 
     def save(self, path, filetype=None):
@@ -45,7 +94,7 @@ class Calc:
             filters = ()
 
         try:
-            self._document.storeToURL(url, filters)
+            self.document.storeToURL(url, filters)
         except IOException as e:
             raise IOError(e.Message)
 
