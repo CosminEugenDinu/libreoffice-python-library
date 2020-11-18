@@ -1,8 +1,0 @@
-{
-    "code-runner.executorMap": {
-        // "python": "pipenv run $pythonPath $fullFileName",
-        "python": "pipenv run $pythonPath examples/new_calc.py"
-    },
-    "code-runner.runInTerminal": true,
-    "python.terminal.activateEnvironment": false
-}
