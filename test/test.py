@@ -12,4 +12,5 @@ data = [
 ]
 range.set_data(data)
 calc.save('./test/testfile.ods')
+calc.desktop.terminate()
 
