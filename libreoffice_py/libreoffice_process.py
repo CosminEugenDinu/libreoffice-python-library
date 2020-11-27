@@ -83,8 +83,8 @@ class LOprocess:
                 if retcode == 81:
                     # self.connect()
                     continue
-                elif retcode is not None:
-                    raise
+                # elif retcode is not None:
+                    # raise
                 try:
                     uno_ctx = resolver.resolve(url)
                     break
