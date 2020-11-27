@@ -3,6 +3,7 @@ import toml
 
 def _get_lo_config():
     lo_config_default = """
+
     [libreoffice]
     # To find this location, open python3 interactive, >>> import uno; print(uno.__file__)
     python_uno_location = "/usr/lib/python3/dist-packages/"
@@ -12,15 +13,19 @@ def _get_lo_config():
 
     [libreoffice.connection]
     binary_location = "/usr/lib/libreoffice/program/soffice.bin"
+
     # UNO socket connection settings
     host = "localhost"
     port = 2002
+
     # content of '--accept=' flag for starting soffice.bin with open connection
     accept_open = "socket,host=%s,port=%s,tcpNoDelay=1;urp;StarOffice.ComponentContext"
+
     # this is used to connect running libreoffice process with opened socket
     connection_url = "uno:socket,host=%s,port=%s,tcpNoDalay=1;urp;StarOffice.ComponentContext"
+
     # how much time to wait for connecting
-    timeout = 3
+    timeout = 5
     """
     # load connection settings from Config toml file
     try:
