@@ -21,9 +21,16 @@ from libreoffice_py import document
 # Create a new spreadsheet (calc) document
 calc = document.Calc()
 sheets = calc.get_sheets()
-sheet_1 = sheets[0]
-cell_1 = sheet_1.getCellByPosition(1,1)
-cell_1.setString('Hello World!')
+sheet_0 = sheets[0]
+cell_0 = sheet_0._uno_sheet.getCellByPosition(0,0)
+cell_0.setString('Hello World!')
+
+range = sheet_0.get_range(1, 1, 2, 2)
+data = [
+    ['Hello', 'World'],
+    [0, 1]
+]
+range.set_data(data)
 
 calc.save('./examples/saved/somefile.ods')
 calc.save('./examples/saved/somefile.jpg', 'jpg')
