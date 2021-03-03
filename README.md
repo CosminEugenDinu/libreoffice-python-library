@@ -1,5 +1,5 @@
 # libreoffice-python-library
-LibreOffice scripting using python
+Use python to manipulate the LibreOffice linux process. This framework can be used to create formatted text documents, pdfs,  spreadsheets or drawings.
 
 ## Prerequisites
 - [python3.x](https://docs.python.org/3/using/unix.html)
