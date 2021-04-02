@@ -56,9 +56,6 @@ class Calc:
         def __getitem__(self, index):
             sheet = Calc.Sheet(self._uno_sheets[index])
             return sheet
-    
-
-            
 
     def get_sheets(self):
         """

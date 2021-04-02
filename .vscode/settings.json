@@ -1,0 +1,5 @@
+{
+    "code-runner.executorMap": {
+        "python": "pipenv run python $fullFileName",
+    }
+}
